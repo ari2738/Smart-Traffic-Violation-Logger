@@ -31,7 +31,8 @@ A Flask-based web application designed to log, track, and manage traffic violati
 ### Prerequisites
 - Python 3.8+
 - pip
-👨‍💻 AuthorYour Name
+  
+**👨‍💻 AuthorYour Name**
 
 GitHub:https://github.com/ari2738
 LinkedIn: https://www.linkedin.com/in/abirami-shanmugam-7551a12b6
