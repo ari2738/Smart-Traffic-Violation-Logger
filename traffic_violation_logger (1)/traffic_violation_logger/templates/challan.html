@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header">
+  <h2 class="mb-1 fw-bold"><i class="fas fa-file-invoice me-2" style="color:var(--accent)"></i>Digital Challan</h2>
+  <p class="mb-0" style="color:var(--muted)">Challan #{{ v.id }} — {{ v.vehicle_number }}</p>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card p-4" style="border:2px solid var(--accent)">
+      <div class="text-center mb-4">
+        <i class="fas fa-traffic-light fa-2x" style="color:var(--accent)"></i>
+        <h4 class="mt-2 fw-bold" style="color:var(--accent)">TRAFFIC CHALLAN</h4>
+        <small style="color:var(--muted)">Government of India — Traffic Enforcement</small>
+      </div>
+      <hr style="border-color:rgba(255,255,255,0.1)">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label style="color:var(--muted); font-size:0.75rem; text-transform:uppercase">Challan ID</label>
+            <div class="fw-bold">#{{ "%05d"|format(v.id) }}</div>
+          </div>
+          <div class="mb-3">
+            <label style="color:var(--muted); font-size:0.75rem; text-transform:uppercase">Vehicle Number</label>
+            <div class="fw-bold fs-5" style="color:var(--accent2)">{{ v.vehicle_number }}</div>
+          </div>
+          <div class="mb-3">
+            <label style="color:var(--muted); font-size:0.75rem; text-transform:uppercase">Violation</label>
+            <div class="fw-bold">{{ v.violation_type }}</div>
+          </div>
+          <div class="mb-3">
+            <label style="color:var(--muted); font-size:0.75rem; text-transform:uppercase">Location</label>
+            <div>{{ v.location }}</div>
+          </div>
+          <div class="mb-3">
+            <label style="color:var(--muted); font-size:0.75rem; text-transform:uppercase">Date</label>
+            <div>{{ v.date.strftime('%d %B %Y') }}</div>
+          </div>
+          <div class="mb-3">
+            <label style="color:var(--muted); font-size:0.75rem; text-transform:uppercase">Fine Amount</label>
+            <div class="fw-bold fs-4" style="color:var(--accent)">₹{{ v.fine_amount }}</div>
+          </div>
+          <div>
+            <label style="color:var(--muted); font-size:0.75rem; text-transform:uppercase">Payment Status</label>
+            <div><span class="badge-{{ v.status.lower() }}">{{ v.status }}</span></div>
+          </div>
+        </div>
+        <div class="col-md-6 text-center d-flex flex-column align-items-center justify-content-center">
+          {% if v.qr_code_path %}
+          <img src="/static/{{ v.qr_code_path }}" alt="QR Code" style="width:180px; border:3px solid var(--accent); border-radius:8px; padding:6px; background:#fff">
+          <p class="mt-2" style="color:var(--muted); font-size:0.8rem">Scan to check payment status</p>
+          {% endif %}
+        </div>
+      </div>
+      <hr style="border-color:rgba(255,255,255,0.1)">
+      <div class="d-flex gap-2 mt-2">
+        {% if v.status == 'Unpaid' %}
+        <form method="POST" action="/pay/{{ v.id }}">
+          <button type="submit" class="btn btn-warning">
+            <i class="fas fa-check-circle me-2"></i>Mark as Paid
+          </button>
+        </form>
+        {% endif %}
+        <a href="/history" class="btn btn-outline-secondary">
+          <i class="fas fa-list me-1"></i>All Violations
+        </a>
+        <button onclick="window.print()" class="btn btn-outline-secondary">
+          <i class="fas fa-print me-1"></i>Print
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

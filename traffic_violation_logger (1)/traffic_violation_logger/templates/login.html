@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="max-width:420px;margin:5rem auto;">
+  <div style="text-align:center;margin-bottom:2rem;">
+    <div style="font-size:3rem;">🚦</div>
+    <h1 style="font-family:'Rajdhani',sans-serif;font-size:1.8rem;font-weight:700;color:var(--white);letter-spacing:4px;">OFFICER LOGIN</h1>
+    <p style="color:var(--muted);font-size:0.8rem;font-family:'Share Tech Mono',monospace;margin-top:0.3rem;">Authorized Personnel Only</p>
+  </div>
+  <div class="card" style="border-top:3px solid var(--red);">
+    <form method="POST">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter username" required autofocus/>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter password" required/>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:0.7rem;">Login</button>
+    </form>
+    <p style="text-align:center;margin-top:1rem;font-size:0.75rem;color:var(--muted);font-family:'Share Tech Mono',monospace;">
+      Default: admin / admin123
+    </p>
+  </div>
+</div>
+{% endblock %}

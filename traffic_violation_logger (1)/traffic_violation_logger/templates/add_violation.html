@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header">
+  <h2 class="mb-1 fw-bold"><i class="fas fa-plus-circle me-2" style="color:var(--accent)"></i>Log New Violation</h2>
+  <p class="mb-0" style="color:var(--muted)">Fill in the details to issue a digital challan</p>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card p-4">
+      <form method="POST">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Vehicle Number</label>
+            <input type="text" name="vehicle_number" class="form-control" placeholder="e.g. TN01AB1234" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Violation Type</label>
+            <select name="violation_type" class="form-select" required>
+              <option value="">Select Violation</option>
+              {% for vt in violation_types %}
+              <option value="{{ vt }}">{{ vt }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Location</label>
+            <input type="text" name="location" class="form-control" placeholder="e.g. Anna Salai, Chennai" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Date</label>
+            <input type="date" name="date" class="form-control" value="{{ today }}" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Fine Amount (₹)</label>
+            <input type="number" name="fine_amount" class="form-control" placeholder="500" min="0" required>
+          </div>
+          <div class="col-12 mt-3">
+            <button type="submit" class="btn btn-danger px-5">
+              <i class="fas fa-file-invoice me-2"></i>Issue Challan
+            </button>
+            <a href="/" class="btn btn-outline-secondary ms-2">Cancel</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
